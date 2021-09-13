@@ -1,0 +1,14 @@
+{
+    "name": "My Library",
+    "short_name": "My Library",
+    "icons": [
+        {
+            "src": "/android-chrome-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#f9f9f9",
+    "background_color": "#f9f9f9",
+    "display": "standalone"
+}

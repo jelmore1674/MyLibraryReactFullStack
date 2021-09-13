@@ -1,0 +1,75 @@
+version: '3.3'
+services:
+    # NGINX
+    nginx:
+        depends_on:
+            - server
+            - client
+        restart: always
+        build:
+            dockerfile: Dockerfile
+            context: ./nginx
+        ports:
+            - '3800:80'
+        networks:
+            - library
+    # FrontEnd React
+    client:
+        container_name: client
+        build: ./my-library
+        working_dir: /app/client
+        command: npm start
+        volumes:
+            - ./my-library:/app/client
+        environment:
+            REACT_APP_HOST: ${HOSTNAME}
+        ports:
+            - 3500:3000
+        networks:
+            - library
+    # Node Backend
+    server:
+        container_name: server
+        build: ./mylibrary-backend
+        working_dir: /app/server
+        command: npm start
+        environment:
+            POSTGRES_URI: postgres://${PG_USER}:${PG_PASS}@postgres:5432/${PG_DB}
+            REDIS_URI: redis://redis:6379
+            JWT_SECRET: ${JWT_SECRET}
+        volumes:
+            - ./mylibrary-backend:/app/server
+            - /app/server/node_modules/
+        ports:
+            - 5500:5000
+
+        networks:
+            - library
+        depends_on:
+            - postgres
+            - redis
+
+    # Postgres DB
+    postgres:
+        environment:
+            POSTGRES_USER: ${PG_USER}
+            POSTGRES_PASSWORD: ${PG_PASS}
+            POSTGRES_DB: ${PG_DB}
+            POSTGRES_HOST: postgres
+        build: ./postgres
+        volumes:
+            - ./postgres/pgdata:/var/lib/postgresql/data
+        ports:
+            - '5431:5432'
+        networks:
+            - library
+    # Redis
+    redis:
+        image: redis
+        ports:
+            - '6379:6379'
+        networks:
+            - library
+networks:
+    library:
+        driver: bridge
