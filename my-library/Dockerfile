@@ -2,8 +2,8 @@ FROM node:latest
 
 WORKDIR /app/client
 
-COPY ./ ./
+RUN npm install -g serve
 
-RUN npm install
+COPY ./ ./
 
 CMD ["/bin/bash"]
