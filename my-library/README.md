@@ -2,9 +2,9 @@
 
 ## LINKS
 
-[Visit Live Site](https://jelmore1674.github.io/my-library)
+[Visit Live Site](https://mylibrary.justinelmore.dev)
 
-[Backend Repository](https://github.com/jelmore1674/mylibrary-backend)
+[Backend Repository](https://github.com/jelmore1674/MyLibraryReactFullStack/tree/main/mylibrary-backend)
 
 ## About
 
