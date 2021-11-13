@@ -1,8 +1,8 @@
 # Library App Backend
 
-[View the app](https://jelmore1674.github.io/my-library)
+[View the app](https://mylibrary.justinelmore.dev)
 
-[Front End Repository](https://github.com/jelmore1674/my-library)
+[Front End Repository](https://github.com/jelmore1674/MyLibraryReactFullStack/tree/main/my-library)
 
 ---
 
@@ -10,6 +10,8 @@
 
 This is the backend for the My Library app I created. The app has user
 authentication using bcrypt. Stores and recalls the data from the database.
+
+**_ Note: I moved the backend over to TypeScript. _**
 
 ---
 

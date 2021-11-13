@@ -11,6 +11,8 @@
 This is a updated library app of my previous one. This app is packed full of
 features. User authentication, storage, and just a new spin on a previous app.
 
+**_ Note: I moved the frontend to Typescript and moved the state Management to Redux _**
+
 <img src='./public/mylibrary.png'>
 
 ## Technologies

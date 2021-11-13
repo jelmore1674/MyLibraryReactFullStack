@@ -1,37 +1,34 @@
 {
-    "name": "mylibrary-backend",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "dev": "nodemon app.js",
-        "start": "nodemon app.js",
-        "test": "jest --watch"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/jelmore1674/mylibrary-backend.git"
-    },
-    "author": "Justin D Elmore",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/jelmore1674/mylibrary-backend/issues"
-    },
-    "homepage": "https://github.com/jelmore1674/mylibrary-backend#readme",
-    "dependencies": {
-        "bcrypt": "^5.0.1",
-        "cors": "^2.8.5",
-        "dotenv": "^10.0.0",
-        "express": "^4.17.1",
-        "jsonwebtoken": "^8.5.1",
-        "knex": "^0.95.6",
-        "morgan": "^1.10.0",
-        "nodemon": "^2.0.12",
-        "pg": "^8.6.0",
-        "redis": "^3.1.2"
-    },
-    "devDependencies": {
-        "jest": "^27.1.1",
-        "supertest": "^6.1.6"
-    }
+	"name": "mylibrary-backend-ts",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start:build": "tsc -w",
+		"start:run": "nodemon build/index.js",
+		"start": "concurrently npm:start:*"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@types/bcrypt": "^5.0.0",
+		"@types/cors": "^2.8.12",
+		"@types/express": "^4.17.13",
+		"@types/jsonwebtoken": "^8.5.5",
+		"@types/morgan": "^1.9.3",
+		"@types/redis": "^2.8.32",
+		"bcrypt": "^5.0.1",
+		"concurrently": "^6.3.0",
+		"cors": "^2.8.5",
+		"dotenv": "^10.0.0",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"knex": "^0.95.14",
+		"morgan": "^1.10.0",
+		"nodemon": "^2.0.14",
+		"pg": "^8.7.1",
+		"redis": "^3.1.2",
+		"reflect-metadata": "^0.1.13",
+		"typescript": "^4.4.4"
+	}
 }
