@@ -34,7 +34,7 @@ services:
         restart: always
         build: ./mylibrary-backend
         working_dir: /app/server
-        command: pm2 start build/index.js
+        command: pm2-runtime build/index.js
         environment:
             POSTGRES_URI: postgres://${PG_USER}:${PG_PASS}@postgres:5432/${PG_DB}
             REDIS_URI: redis://redis:6379
