@@ -8,7 +8,7 @@ import { login } from '../../redux/user/userSlice';
 
 import Input from '../input/input';
 
-const url = `${process.env.REACT_APP_HOST}/signin`;
+const url = `/api/signin`;
 
 export default function Signin(): JSX.Element {
 	const [input, setInput] = useState({
@@ -47,16 +47,13 @@ export default function Signin(): JSX.Element {
 			const data = await response.json();
 			if (data.success) {
 				saveAuthTokenInSession(data.token);
-				const resp = await fetch(
-					`${process.env.REACT_APP_HOST}/users/${data.userid}`,
-					{
-						method: 'GET',
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: data.token,
-						},
-					}
-				);
+				const resp = await fetch(`/api/users/${data.userid}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: data.token,
+					},
+				});
 				const user = await resp.json();
 				if (user.userid) {
 					dispatch(login(user));
@@ -98,19 +95,17 @@ export default function Signin(): JSX.Element {
 								setValue={input.password}
 								handleChange={handleChange}
 							/>
-						</form>
-						<div className='d-flex justify-content-between flex-column'>
-							<button
-								className='btn btn-primary btn-lg col-xs-12 w-100'
-								onClick={(e) => handleSubmit(e)}>
-								Sign In
-							</button>
-							<Link to='/register' className='col-xs-12'>
-								<button className='btn btn-secondary btn-lg w-100  '>
-									Register
+							<div className='d-flex justify-content-between flex-column'>
+								<button className='btn btn-primary btn-lg col-xs-12 w-100'>
+									Sign In
 								</button>
-							</Link>
-						</div>
+								<Link to='/register' className='col-xs-12'>
+									<button className='btn btn-secondary btn-lg w-100  '>
+										Register
+									</button>
+								</Link>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>

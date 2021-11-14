@@ -47,7 +47,9 @@ class SignInController {
 		} else {
 			try {
 				const data = await Auth.userSignin(email, password);
+				console.log(data);
 				if (data) {
+					await LibraryModel.deleteDemoLibrary();
 					const session = await Auth.createSessions(data);
 					res.status(202).json(session);
 				} else {

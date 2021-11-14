@@ -30,7 +30,7 @@ export default function Register(): JSX.Element {
 		event: React.SyntheticEvent<HTMLFormElement>
 	): Promise<void> => {
 		event.preventDefault();
-		const response = await fetch(`${process.env.REACT_APP_HOST}/register`, {
+		const response = await fetch(`/api/register`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -44,16 +44,13 @@ export default function Register(): JSX.Element {
 		const data = await response.json();
 		if (data.success) {
 			saveAuthTokenInSession(data.token);
-			const resp = await fetch(
-				`${process.env.REACT_APP_HOST}/users/${data.userId}`,
-				{
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: data.token,
-					},
-				}
-			);
+			const resp = await fetch(`/api/users/${data.userid}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: data.token,
+				},
+			});
 			const user = await resp.json();
 			if (user.userid) {
 				await dispatch(login(user));

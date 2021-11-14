@@ -4,7 +4,7 @@ import { login, logout } from '../../redux/user/userSlice';
 
 import AddBookButton from '../add-book-button/add-book';
 
-const signinUrl: string = `${process.env.REACT_APP_HOST}/signin`;
+const signinUrl: string = `/api/signin`;
 
 export default function Nav(): JSX.Element {
 	const dispatch = useDispatch();
@@ -16,6 +16,7 @@ export default function Nav(): JSX.Element {
 	};
 
 	const handleDemo = async (): Promise<void> => {
+		console.log(signinUrl);
 		const saveAuthTokenInSession = (token: string) => {
 			window.sessionStorage.setItem('token', token);
 		};
@@ -33,16 +34,13 @@ export default function Nav(): JSX.Element {
 			const data = await response.json();
 			if (data.success) {
 				saveAuthTokenInSession(data.token);
-				const resp = await fetch(
-					`${process.env.REACT_APP_HOST}/users/${data.userId}`,
-					{
-						method: 'GET',
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: data.token,
-						},
-					}
-				);
+				const resp = await fetch(`/api/users/${data.userid}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: data.token,
+					},
+				});
 				const user = await resp.json();
 				if (user.userid) {
 					dispatch(login(user));
@@ -67,6 +65,7 @@ export default function Nav(): JSX.Element {
 						<i className='fas fa-book-reader'></i>
 					</span>
 					<span className='mb-0 h1'>My Library</span>
+					<span>{process.env.REACT_APP_HOST}</span>
 				</div>
 				<button
 					className='navbar-toggler'

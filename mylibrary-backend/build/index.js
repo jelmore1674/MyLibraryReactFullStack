@@ -28,12 +28,12 @@ var morgan_1 = __importDefault(require("morgan"));
 var controllers_1 = require("./controllers");
 var dotenv = __importStar(require("dotenv"));
 dotenv.config();
-var app = express_1.default();
+var app = (0, express_1.default)();
 var PORT = process.env.PORT || 5500;
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
-app.use(cors_1.default());
-app.use(morgan_1.default('combined'));
+app.use((0, cors_1.default)());
+app.use((0, morgan_1.default)('combined'));
 app.get('/', function (req, res) {
     res.status(200).send('Server is running');
 });

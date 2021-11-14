@@ -1,11 +1,7 @@
 FROM node:16
 
 WORKDIR /app/client
-
-COPY ./ ./
-
-RUN npm install
-
-
+COPY ./build ./build
+RUN npm install serve -g 
 
 CMD ["/bin/bash"]

@@ -9,7 +9,7 @@ export const redisClient = redis.createClient(process.env.REDIS_URI as string);
 interface JWT {
 	token: string;
 	success: boolean;
-	userId: number;
+	userid: number;
 }
 
 function signToken(email: string): string {
@@ -68,7 +68,7 @@ export class Auth {
 		const token = signToken(email);
 		return setToken(token, userid.toString())
 			.then(() => {
-				return { success: true, userId: userid, token };
+				return { success: true, userid: userid, token };
 			})
 			.catch(console.error);
 	};

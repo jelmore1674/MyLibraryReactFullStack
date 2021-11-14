@@ -2,7 +2,7 @@ import { User } from '../redux/user/userSlice';
 
 export const handleToken = async (token: string): Promise<User | void> => {
 	try {
-		const res = await fetch(`${process.env.REACT_APP_HOST}/signin`, {
+		const res = await fetch(`${process.env.REACT_APP_HOST}/api/signin`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ export const handleToken = async (token: string): Promise<User | void> => {
 		const data = await res.json();
 		if (data.id) {
 			const resp = await fetch(
-				`${process.env.REACT_APP_HOST}/users/${data.id}`,
+				`${process.env.REACT_APP_HOST}/api/users/${data.id}`,
 				{
 					method: 'GET',
 					headers: {

@@ -41,18 +41,20 @@ var models_1 = require("../models");
 var LibraryModel = /** @class */ (function () {
     function LibraryModel() {
     }
+    var _a;
+    _a = LibraryModel;
     LibraryModel.addBook = function (newBook) { return __awaiter(void 0, void 0, void 0, function () {
         var err_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        return __generator(_a, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, models_1.db('library').insert(newBook)];
+                    _b.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, (0, models_1.db)('library').insert(newBook)];
                 case 1:
-                    _a.sent();
+                    _b.sent();
                     return [2 /*return*/, 'Success'];
                 case 2:
-                    err_1 = _a.sent();
+                    err_1 = _b.sent();
                     return [2 /*return*/, 'Failure'];
                 case 3: return [2 /*return*/];
             }
@@ -60,11 +62,11 @@ var LibraryModel = /** @class */ (function () {
     }); };
     LibraryModel.createDemoLibrary = function (id) { return __awaiter(void 0, void 0, void 0, function () {
         var err_2;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        return __generator(_a, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, models_1.db('library').insert([
+                    _b.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, (0, models_1.db)('library').insert([
                             {
                                 userid: id,
                                 email: 'demo@demo.com',
@@ -91,10 +93,10 @@ var LibraryModel = /** @class */ (function () {
                             },
                         ])];
                 case 1:
-                    _a.sent();
+                    _b.sent();
                     return [2 /*return*/, 'created library'];
                 case 2:
-                    err_2 = _a.sent();
+                    err_2 = _b.sent();
                     return [2 /*return*/, 'failed to create library'];
                 case 3: return [2 /*return*/];
             }
@@ -102,11 +104,11 @@ var LibraryModel = /** @class */ (function () {
     }); };
     LibraryModel.createDefaultLibrary = function (user) { return __awaiter(void 0, void 0, void 0, function () {
         var err_3;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        return __generator(_a, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, models_1.db('library').insert([
+                    _b.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, (0, models_1.db)('library').insert([
                             {
                                 userid: user.userid,
                                 email: user.email,
@@ -133,10 +135,10 @@ var LibraryModel = /** @class */ (function () {
                             },
                         ])];
                 case 1:
-                    _a.sent();
+                    _b.sent();
                     return [2 /*return*/, 'created library'];
                 case 2:
-                    err_3 = _a.sent();
+                    err_3 = _b.sent();
                     return [2 /*return*/, 'failed to create library'];
                 case 3: return [2 /*return*/];
             }
@@ -144,18 +146,18 @@ var LibraryModel = /** @class */ (function () {
     }); };
     LibraryModel.deleteDemoLibrary = function () { return __awaiter(void 0, void 0, void 0, function () {
         var err_4;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        return __generator(_a, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, models_1.db('library')
+                    _b.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, (0, models_1.db)('library')
                             .del('*')
                             .where('email', '=', 'demo@demo.com')];
                 case 1:
-                    _a.sent();
+                    _b.sent();
                     return [3 /*break*/, 3];
                 case 2:
-                    err_4 = _a.sent();
+                    err_4 = _b.sent();
                     return [2 /*return*/, 'failed to delete library'];
                 case 3: return [2 /*return*/];
             }
@@ -163,19 +165,19 @@ var LibraryModel = /** @class */ (function () {
     }); };
     LibraryModel.getLibrary = function (user) { return __awaiter(void 0, void 0, void 0, function () {
         var library, err_5;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        return __generator(_a, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, models_1.db('library')
+                    _b.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, (0, models_1.db)('library')
                             .select('*')
                             .where('userid', user.userid)
                             .orderBy('id', 'asc')];
                 case 1:
-                    library = _a.sent();
+                    library = _b.sent();
                     return [2 /*return*/, library];
                 case 2:
-                    err_5 = _a.sent();
+                    err_5 = _b.sent();
                     return [2 /*return*/, 'failed to get library'];
                 case 3: return [2 /*return*/];
             }
@@ -183,16 +185,16 @@ var LibraryModel = /** @class */ (function () {
     }); };
     LibraryModel.removeBook = function (id) { return __awaiter(void 0, void 0, void 0, function () {
         var err_6;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        return __generator(_a, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, models_1.db('library').del().where('id', id)];
+                    _b.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, (0, models_1.db)('library').del().where('id', id)];
                 case 1:
-                    _a.sent();
+                    _b.sent();
                     return [2 /*return*/, 'success'];
                 case 2:
-                    err_6 = _a.sent();
+                    err_6 = _b.sent();
                     return [2 /*return*/, 'error'];
                 case 3: return [2 /*return*/];
             }
@@ -200,19 +202,19 @@ var LibraryModel = /** @class */ (function () {
     }); };
     LibraryModel.updateCompletedStatus = function (id, completed) { return __awaiter(void 0, void 0, void 0, function () {
         var err_7;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        return __generator(_a, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, models_1.db('library')
+                    _b.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, (0, models_1.db)('library')
                             .select('*')
                             .where('id', id)
                             .update({ completed: completed })];
                 case 1:
-                    _a.sent();
+                    _b.sent();
                     return [2 /*return*/, Promise.resolve('Success')];
                 case 2:
-                    err_7 = _a.sent();
+                    err_7 = _b.sent();
                     return [2 /*return*/, Promise.reject('Unable to update book status')];
                 case 3: return [2 /*return*/];
             }

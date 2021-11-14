@@ -45,9 +45,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var decorators_1 = require("./decorators");
 var models_1 = require("../models");
 var auth_1 = require("../utils/auth");
+var decorators_1 = require("./decorators");
 var SignInController = /** @class */ (function () {
     function SignInController() {
     }
@@ -104,45 +104,49 @@ var SignInController = /** @class */ (function () {
                         err_1 = _b.sent();
                         res.status(500).json({ message: err_1 });
                         return [3 /*break*/, 4];
-                    case 4: return [3 /*break*/, 11];
+                    case 4: return [3 /*break*/, 12];
                     case 5:
-                        _b.trys.push([5, 10, , 11]);
+                        _b.trys.push([5, 11, , 12]);
                         return [4 /*yield*/, auth_1.Auth.userSignin(email, password)];
                     case 6:
                         data = _b.sent();
-                        if (!data) return [3 /*break*/, 8];
-                        return [4 /*yield*/, auth_1.Auth.createSessions(data)];
+                        console.log(data);
+                        if (!data) return [3 /*break*/, 9];
+                        return [4 /*yield*/, models_1.LibraryModel.deleteDemoLibrary()];
                     case 7:
+                        _b.sent();
+                        return [4 /*yield*/, auth_1.Auth.createSessions(data)];
+                    case 8:
                         session = _b.sent();
                         res.status(202).json(session);
-                        return [3 /*break*/, 9];
-                    case 8:
+                        return [3 /*break*/, 10];
+                    case 9:
                         Promise.reject(data);
-                        _b.label = 9;
-                    case 9: return [3 /*break*/, 11];
-                    case 10:
+                        _b.label = 10;
+                    case 10: return [3 /*break*/, 12];
+                    case 11:
                         err_2 = _b.sent();
                         res.status(401).json({ message: err_2 });
-                        return [3 /*break*/, 11];
-                    case 11: return [2 /*return*/];
+                        return [3 /*break*/, 12];
+                    case 12: return [2 /*return*/];
                 }
             });
         });
     };
     __decorate([
-        decorators_1.post('/test'),
+        (0, decorators_1.post)('/test'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
     ], SignInController.prototype, "handleSignin", null);
     __decorate([
-        decorators_1.post('/'),
+        (0, decorators_1.post)('/'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
     ], SignInController.prototype, "signinAuthentication", null);
     SignInController = __decorate([
-        decorators_1.controller('/signin')
+        (0, decorators_1.controller)('/signin')
     ], SignInController);
     return SignInController;
 }());

@@ -36,24 +36,21 @@ export default function Form(): JSX.Element {
 	const addBook = async (event: React.SyntheticEvent): Promise<void> => {
 		event.preventDefault();
 		if (user) {
-			const data = await fetch(
-				`${process.env.REACT_APP_HOST}/library-item`,
-				{
-					method: 'POST',
-					headers: {
-						'Access-Control-Allow-Origin': '*',
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						userid: user.userid,
-						title: input.title,
-						author: input.author,
-						pages: input.pages,
-						completed: input.completed,
-						email: user.email,
-					}),
-				}
-			);
+			const data = await fetch(`/api/library-item`, {
+				method: 'POST',
+				headers: {
+					'Access-Control-Allow-Origin': '*',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					userid: user.userid,
+					title: input.title,
+					author: input.author,
+					pages: input.pages,
+					completed: input.completed,
+					email: user.email,
+				}),
+			});
 			const book = await data.json();
 			if (book === 'Successfully added book') {
 				setInput(emptyInput);

@@ -20,20 +20,17 @@ export default function BookCollection(): JSX.Element {
 
 	const removeBook = async (id: number): Promise<void> => {
 		try {
-			const response = await fetch(
-				`${process.env.REACT_APP_HOST}/library-item`,
-				{
-					method: 'delete',
-					headers: {
-						'Access-Control-Allow-Origin': '*',
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						id: id,
-						remove: true,
-					}),
-				}
-			);
+			const response = await fetch(`/api/library-item`, {
+				method: 'delete',
+				headers: {
+					'Access-Control-Allow-Origin': '*',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					id: id,
+					remove: true,
+				}),
+			});
 			const data = await response.json();
 			if (data === 'success') {
 				if (user) {
@@ -52,21 +49,18 @@ export default function BookCollection(): JSX.Element {
 			for (var i = 0; i < library.length; i++) {
 				if (library[i].id === id) {
 					const completedStatus = !library[i].completed;
-					const response = await fetch(
-						`${process.env.REACT_APP_HOST}/library-item`,
-						{
-							method: 'put',
-							headers: {
-								'Access-Control-Allow-Origin': '*',
-								'Content-Type': 'application/json',
-							},
-							body: JSON.stringify({
-								id: id,
-								update: true,
-								completed: completedStatus,
-							}),
-						}
-					);
+					const response = await fetch(`/api/library-item`, {
+						method: 'put',
+						headers: {
+							'Access-Control-Allow-Origin': '*',
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({
+							id: id,
+							update: true,
+							completed: completedStatus,
+						}),
+					});
 					const data = await response.json();
 					if (data === 'Success') {
 						if (user) {

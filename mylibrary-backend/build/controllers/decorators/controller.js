@@ -1,8 +1,12 @@
 "use strict";
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.controller = void 0;
@@ -36,8 +40,8 @@ function controller(routePrefix) {
             var requiredBodyProps = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.validator, target.prototype, key) || [];
             var validator = bodyValidators(requiredBodyProps);
             if (path) {
-                router[method].apply(router, __spreadArray(__spreadArray(["" + routePrefix + path], middlewares), [validator,
-                    routeHandler]));
+                router[method].apply(router, __spreadArray(__spreadArray(["" + routePrefix + path], middlewares, false), [validator,
+                    routeHandler], false));
             }
         }
     };
