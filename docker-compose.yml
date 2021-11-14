@@ -5,7 +5,7 @@ services:
         depends_on:
             - server
             - client
-        restart: always
+        restart: unless-stopped
         build:
             dockerfile: Dockerfile
             context: ./nginx
@@ -31,7 +31,7 @@ services:
     # Node Backend
     server:
         container_name: server
-        restart: always
+        restart: unless-stopped
         build: ./mylibrary-backend
         working_dir: /app/server
         command: pm2-runtime build/index.js
@@ -53,7 +53,7 @@ services:
 
     # Postgres DB
     postgres:
-        restart: always
+        restart: unless-stopped
         environment:
             POSTGRES_USER: ${PG_USER}
             POSTGRES_PASSWORD: ${PG_PASS}
@@ -68,12 +68,25 @@ services:
             - library
     # Redis
     redis:
-        restart: always
+        restart: unless-stopped
         image: redis
         ports:
             - '6377:6379'
         networks:
             - library
+    # Adminer
+    adminer:
+        image: adminer:latest
+        restart: unless-stopped
+        networks:
+            - library
+        ports:
+            - 8000:8080
+        depends_on:
+            - postgres
+        environment:
+            ADMINER_DEFAULT_SERVER: postgres
+
 networks:
     library:
         driver: bridge
