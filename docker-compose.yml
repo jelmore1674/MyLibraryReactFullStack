@@ -32,7 +32,7 @@ services:
         container_name: server
         build: ./mylibrary-backend
         working_dir: /app/server
-        command: npm start
+        command: pm2 start build/index.js
         environment:
             POSTGRES_URI: postgres://${PG_USER}:${PG_PASS}@postgres:5432/${PG_DB}
             REDIS_URI: redis://redis:6379
@@ -67,9 +67,9 @@ services:
     redis:
         image: redis
         ports:
-            - '6378:6379'
+            - '6377:6379'
         networks:
             - library
 networks:
     library:
-        driver: bridge
+            driver: bridge

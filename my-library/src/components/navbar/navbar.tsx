@@ -65,7 +65,6 @@ export default function Nav(): JSX.Element {
 						<i className='fas fa-book-reader'></i>
 					</span>
 					<span className='mb-0 h1'>My Library</span>
-					<span>{process.env.REACT_APP_HOST}</span>
 				</div>
 				<button
 					className='navbar-toggler'
