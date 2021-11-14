@@ -165,31 +165,31 @@ var LibraryController = /** @class */ (function () {
         });
     };
     __decorate([
-        (0, decorators_1.post)('/'),
+        decorators_1.post('/'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
     ], LibraryController.prototype, "addToLibrary", null);
     __decorate([
-        (0, decorators_1.put)('/'),
+        decorators_1.put('/'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
     ], LibraryController.prototype, "updateLibrary", null);
     __decorate([
-        (0, decorators_1.del)('/'),
+        decorators_1.del('/'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
     ], LibraryController.prototype, "removeBook", null);
     __decorate([
-        (0, decorators_1.get)('/:userid'),
+        decorators_1.get('/:userid'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
     ], LibraryController.prototype, "displayLibrary", null);
     LibraryController = __decorate([
-        (0, decorators_1.controller)('/library-item')
+        decorators_1.controller('/library-item')
     ], LibraryController);
     return LibraryController;
 }());

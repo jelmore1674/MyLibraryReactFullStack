@@ -87,13 +87,13 @@ var RegisterController = /** @class */ (function () {
         });
     };
     __decorate([
-        (0, decorators_1.post)('/'),
+        decorators_1.post('/'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
     ], RegisterController.prototype, "handleRegister", null);
     RegisterController = __decorate([
-        (0, decorators_1.controller)('/register')
+        decorators_1.controller('/register')
     ], RegisterController);
     return RegisterController;
 }());

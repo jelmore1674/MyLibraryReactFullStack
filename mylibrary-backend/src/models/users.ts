@@ -62,4 +62,8 @@ export class UserModel {
 			return Promise.reject('Unable to get user');
 		}
 	};
+	static getAllUsers = async (): Promise<User[]> => {
+		const users = await db<User>('users').select('*');
+		return users;
+	};
 }

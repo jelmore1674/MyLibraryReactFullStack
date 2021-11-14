@@ -45,36 +45,34 @@ var models_1 = require("../models");
 var UserModel = /** @class */ (function () {
     function UserModel() {
     }
-    var _a;
-    _a = UserModel;
     UserModel.createUser = function (email, password, name) { return __awaiter(void 0, void 0, void 0, function () {
         var hash, loginEmail, newUser, err_1;
-        return __generator(_a, function (_b) {
-            switch (_b.label) {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    _b.trys.push([0, 4, , 5]);
+                    _a.trys.push([0, 4, , 5]);
                     return [4 /*yield*/, bcrypt_1.default.hashSync(password, 10)];
                 case 1:
-                    hash = _b.sent();
-                    return [4 /*yield*/, (0, models_1.db)('login')
+                    hash = _a.sent();
+                    return [4 /*yield*/, models_1.db('login')
                             .insert({
                             hash: hash,
                             email: email,
                         })
                             .returning('email')];
                 case 2:
-                    loginEmail = _b.sent();
-                    return [4 /*yield*/, (0, models_1.db)('users')
+                    loginEmail = _a.sent();
+                    return [4 /*yield*/, models_1.db('users')
                             .insert({
                             email: loginEmail[0],
                             name: name,
                         })
                             .returning('*')];
                 case 3:
-                    newUser = _b.sent();
+                    newUser = _a.sent();
                     return [2 /*return*/, newUser[0]];
                 case 4:
-                    err_1 = _b.sent();
+                    err_1 = _a.sent();
                     return [2 /*return*/, Promise.reject('Unable to add user')];
                 case 5: return [2 /*return*/];
             }
@@ -82,37 +80,37 @@ var UserModel = /** @class */ (function () {
     }); };
     UserModel.getUserByEmail = function (email) { return __awaiter(void 0, void 0, void 0, function () {
         var user;
-        return __generator(_a, function (_b) {
-            switch (_b.label) {
-                case 0: return [4 /*yield*/, (0, models_1.db)('users').select('*').where('email', email)];
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, models_1.db('users').select('*').where('email', email)];
                 case 1:
-                    user = _b.sent();
+                    user = _a.sent();
                     return [2 /*return*/, user[0]];
             }
         });
     }); };
     UserModel.getUserHashByEmail = function (email) { return __awaiter(void 0, void 0, void 0, function () {
         var user;
-        return __generator(_a, function (_b) {
-            switch (_b.label) {
-                case 0: return [4 /*yield*/, (0, models_1.db)('login')
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, models_1.db('login')
                         .select('email', 'hash')
                         .where('email', email)];
                 case 1:
-                    user = _b.sent();
+                    user = _a.sent();
                     return [2 /*return*/, user[0]];
             }
         });
     }); };
     UserModel.getUserByID = function (userId) { return __awaiter(void 0, void 0, void 0, function () {
         var user, err_2;
-        return __generator(_a, function (_b) {
-            switch (_b.label) {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    _b.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, (0, models_1.db)('users').where('userid', userId)];
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, models_1.db('users').where('userid', userId)];
                 case 1:
-                    user = _b.sent();
+                    user = _a.sent();
                     if (user.length) {
                         return [2 /*return*/, user[0]];
                     }
@@ -121,9 +119,20 @@ var UserModel = /** @class */ (function () {
                     }
                     return [3 /*break*/, 3];
                 case 2:
-                    err_2 = _b.sent();
+                    err_2 = _a.sent();
                     return [2 /*return*/, Promise.reject('Unable to get user')];
                 case 3: return [2 /*return*/];
+            }
+        });
+    }); };
+    UserModel.getAllUsers = function () { return __awaiter(void 0, void 0, void 0, function () {
+        var users;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, models_1.db('users').select('*')];
+                case 1:
+                    users = _a.sent();
+                    return [2 /*return*/, users];
             }
         });
     }); };

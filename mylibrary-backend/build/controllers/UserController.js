@@ -72,14 +72,41 @@ var UserController = /** @class */ (function () {
             });
         });
     };
+    UserController.prototype.getAllUsers = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var users, e_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, models_1.UserModel.getAllUsers()];
+                    case 1:
+                        users = _a.sent();
+                        res.status(202).json(users);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        e_2 = _a.sent();
+                        res.status(404).json(e_2);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     __decorate([
-        (0, decorators_1.get)('/:id'),
+        decorators_1.get('/:id'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
     ], UserController.prototype, "getSingleUser", null);
+    __decorate([
+        decorators_1.get('/'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object, Object]),
+        __metadata("design:returntype", Promise)
+    ], UserController.prototype, "getAllUsers", null);
     UserController = __decorate([
-        (0, decorators_1.controller)('/users')
+        decorators_1.controller('/users')
     ], UserController);
     return UserController;
 }());

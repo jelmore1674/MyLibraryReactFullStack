@@ -66,11 +66,9 @@ var setToken = function (key, value) {
 var Auth = /** @class */ (function () {
     function Auth() {
     }
-    var _a;
-    _a = Auth;
     Auth.getAuthTokenId = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var authorization, data;
-        return __generator(_a, function (_b) {
+        return __generator(this, function (_a) {
             authorization = req.headers.authorization;
             try {
                 if (authorization) {
@@ -112,16 +110,16 @@ var Auth = /** @class */ (function () {
     };
     Auth.userSignin = function (email, password) { return __awaiter(void 0, void 0, void 0, function () {
         var data, isValid, user, err_1;
-        return __generator(_a, function (_b) {
-            switch (_b.label) {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    _b.trys.push([0, 6, , 7]);
+                    _a.trys.push([0, 6, , 7]);
                     if (!email || !password) {
                         throw new Error('Please enter email and password');
                     }
                     return [4 /*yield*/, models_1.UserModel.getUserHashByEmail(email)];
                 case 1:
-                    data = _b.sent();
+                    data = _a.sent();
                     console.log(data);
                     if (!data) {
                         throw new Error('User not found');
@@ -129,16 +127,16 @@ var Auth = /** @class */ (function () {
                     if (!data) return [3 /*break*/, 5];
                     return [4 /*yield*/, bcrypt_1.default.compareSync(password, data.hash)];
                 case 2:
-                    isValid = _b.sent();
+                    isValid = _a.sent();
                     if (!isValid) return [3 /*break*/, 4];
                     return [4 /*yield*/, models_1.UserModel.getUserByEmail(email)];
                 case 3:
-                    user = _b.sent();
+                    user = _a.sent();
                     return [2 /*return*/, Promise.resolve(user)];
                 case 4: return [2 /*return*/, Promise.reject('password incorrect')];
                 case 5: return [3 /*break*/, 7];
                 case 6:
-                    err_1 = _b.sent();
+                    err_1 = _a.sent();
                     return [2 /*return*/, Promise.reject(err_1)];
                 case 7: return [2 /*return*/];
             }
