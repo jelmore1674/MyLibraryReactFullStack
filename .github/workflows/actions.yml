@@ -17,6 +17,6 @@ jobs:
               with:
                   version: '1.29.2'
             - name: Create Env file
-              run: PG_PASS="${{secrets.ENV_PG_PASS}}"  PG_USER="${{secrets.ENV_PG_USER}}" PG_DB="${{secrets.ENV_PG_DB}}" JWT="${{secrets.ENV_JWT}}" HOST_NAME="${{secrets.HOST_NAME}}"
+              run: echo "PG_PASS="${{secrets.ENV_PG_PASS}}"" > .env && echo "PG_USER="${{secrets.ENV_PG_USER}}"" > .env && echo "PG_DB="${{secrets.ENV_PG_DB}}"" > .env && echo "JWT="${{secrets.ENV_JWT}}"" > .env && echo "HOST_NAME="${{secrets.HOST_NAME}}"" > .env
             - name: Docker-Compose Up
               run: docker-compose up
