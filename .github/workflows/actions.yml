@@ -16,5 +16,7 @@ jobs:
             - uses: KengoTODA/actions-setup-docker-compose@main
               with:
                   version: '1.29.2'
+            - name: Create Env file
+              run: PG_PASS="${secret.ENV_PG_PASS}"  PG_USER="${PG_USER}" PG_DB="${PG_DB}" JWT=${secret.ENV_JWT} HOST_NAME="${secret.HOST_NAME}"
             - name: Docker-Compose Up
               run: docker-compose up
