@@ -10,11 +10,8 @@ on:
 
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: self-hosted
         steps:
             - uses: actions/checkout@v2
             - name: Docker-Compose Up
-              uses: actions/docker-compose@v1
-              with:
-                  compose_file: docker-compose.yml
-                  command: up -d
+              run: docker-compose up -d
