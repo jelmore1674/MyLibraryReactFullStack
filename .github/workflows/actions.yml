@@ -16,7 +16,11 @@ jobs:
             - uses: KengoTODA/actions-setup-docker-compose@main
               with:
                   version: '1.29.2'
-            - name: Create Env file
-              run: echo "PG_PASS="${{secrets.ENV_PG_PASS}}"" > .env && echo "PG_USER="${{secrets.ENV_PG_USER}}"" > .env && echo "PG_DB="${{secrets.ENV_PG_DB}}"" > .env && echo "JWT="${{secrets.ENV_JWT}}"" > .env && echo "HOST_NAME="${{secrets.HOST_NAME}}"" > .env
+              env:
+                  PG_DB: ${{ secrets.ENV_PG_DB }}
+                  PG_USER: ${{ secrets.ENV_PG_USER }}
+                  PG_PASS: ${{ secrets.ENV_PG_PASS }}
+                  HOST_NAME: ${{ secrets.ENV_HOST_NAME }}
+                  JWT_SECRET: ${{ secrets.ENV_JWT }}
             - name: Docker-Compose Up
               run: docker-compose up
