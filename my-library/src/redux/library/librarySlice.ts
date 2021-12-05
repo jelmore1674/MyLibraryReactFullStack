@@ -14,7 +14,33 @@ export const fetchLibraryByUserId = createAsyncThunk(
 	'library/fetchLibraryByUserId',
 	async (userId: number, { rejectWithValue }) => {
 		try {
-			const response = await fetch(`api/library-item/${userId}`);
+			const response = await fetch(
+				`http://localhost:5500/library-item/${userId}`
+			);
+			const data = await response.json();
+			return data;
+		} catch (error: any) {
+			return rejectWithValue(error);
+		}
+	}
+);
+
+export const changeLibraryItemStatus = createAsyncThunk(
+	'library/changeLibraryItemStatus',
+	async (book: Book, { rejectWithValue }) => {
+		try {
+			const response = await fetch(`/api/library-item`, {
+				method: 'put',
+				headers: {
+					'Access-Control-Allow-Origin': '*',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					id: book.id,
+					update: true,
+					completed: !book.completed,
+				}),
+			});
 			const data = await response.json();
 			return data;
 		} catch (error: any) {

@@ -94,19 +94,19 @@ var UserController = /** @class */ (function () {
         });
     };
     __decorate([
-        decorators_1.get('/:id'),
+        (0, decorators_1.get)('/:id'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
     ], UserController.prototype, "getSingleUser", null);
     __decorate([
-        decorators_1.get('/'),
+        (0, decorators_1.get)('/'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
     ], UserController.prototype, "getAllUsers", null);
     UserController = __decorate([
-        decorators_1.controller('/users')
+        (0, decorators_1.controller)('/users')
     ], UserController);
     return UserController;
 }());

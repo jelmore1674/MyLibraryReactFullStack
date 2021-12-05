@@ -1,0 +1,20 @@
+name: CI-CD
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Docker-Compose Up
+              uses: actions/docker-compose@v1
+              with:
+                  compose_file: docker-compose.yml
+                  command: up -d

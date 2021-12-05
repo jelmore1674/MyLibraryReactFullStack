@@ -64,7 +64,10 @@ export default function Register(): JSX.Element {
 		<MDBAnimation type='slideInLeft' duration={1.2}>
 			<div className='mt-5 d-flex justify-content-center '>
 				<div className='container-fluid col-8 offset-2 bg-primary-trans  overflow-hidden  shadow-lg p-3 mb-5 rounded'>
-					<form className='w-100' onSubmit={handleSubmit}>
+					<form
+						className='w-100'
+						onSubmit={handleSubmit}
+						data-testid='register-form'>
 						<div className='border-bottom h2 p-2 text-white'>
 							Register
 						</div>

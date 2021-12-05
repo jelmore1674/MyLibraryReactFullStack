@@ -12,6 +12,7 @@ export default function AddBookButton({
 	return (
 		<div className='d-grid'>
 			<button
+				aria-label='button'
 				className={`btn btn-large btn-success rounded ${classes}`}
 				onClick={onClick}>
 				Add Book

@@ -110,7 +110,6 @@ var SignInController = /** @class */ (function () {
                         return [4 /*yield*/, auth_1.Auth.userSignin(email, password)];
                     case 6:
                         data = _b.sent();
-                        console.log(data);
                         if (!data) return [3 /*break*/, 9];
                         return [4 /*yield*/, models_1.LibraryModel.deleteDemoLibrary()];
                     case 7:
@@ -134,19 +133,19 @@ var SignInController = /** @class */ (function () {
         });
     };
     __decorate([
-        decorators_1.post('/test'),
+        (0, decorators_1.post)('/test'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
     ], SignInController.prototype, "handleSignin", null);
     __decorate([
-        decorators_1.post('/'),
+        (0, decorators_1.post)('/'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
     ], SignInController.prototype, "signinAuthentication", null);
     SignInController = __decorate([
-        decorators_1.controller('/signin')
+        (0, decorators_1.controller)('/signin')
     ], SignInController);
     return SignInController;
 }());

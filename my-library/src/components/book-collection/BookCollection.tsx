@@ -14,7 +14,9 @@ export default function BookCollection(): JSX.Element {
 	// useEffect is used to fetch the library collection
 	useEffect(() => {
 		if (user) {
-			dispatch(fetchLibraryByUserId(user.userid));
+			if (user.userid) {
+				dispatch(fetchLibraryByUserId(user.userid));
+			}
 		}
 	}, [dispatch, user]);
 
@@ -98,7 +100,7 @@ export default function BookCollection(): JSX.Element {
 			<div
 				data-testid='bookCollection'
 				className='row rol-cols-xs-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gy-4 justify-content-center align-items-center'>
-				{library.map(createBookCard)}
+				{library && library.map(createBookCard)}
 			</div>
 		</div>
 	);

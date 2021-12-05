@@ -1,7 +1,23 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {
+	configureStore,
+	createStore,
+	combineReducers,
+	EnhancedStore,
+} from '@reduxjs/toolkit';
 import modalReducer from './modal/modalSlice';
 import userReducer from './user/userSlice';
 import libraryReducer from './library/librarySlice';
+
+export function createTestStore(initialState: any): EnhancedStore {
+	const reducer = {
+		modalReducer,
+		userReducer,
+		libraryReducer,
+	};
+	const reducers = combineReducers(reducer);
+	const store = createStore(reducers, initialState);
+	return store;
+}
 
 export const store = configureStore({
 	reducer: {

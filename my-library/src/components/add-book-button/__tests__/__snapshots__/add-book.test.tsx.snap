@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddBookButton /> should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="d-grid"
+  >
+    <button
+      aria-label="button"
+      class="btn btn-large btn-success rounded "
+    >
+      Add Book
+    </button>
+  </div>
+</DocumentFragment>
+`;

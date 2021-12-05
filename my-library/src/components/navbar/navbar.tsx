@@ -1,10 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../redux/modal/modalSlice';
-import { login, logout } from '../../redux/user/userSlice';
-
+import { getToken, logout } from '../../redux/user/userSlice';
 import AddBookButton from '../add-book-button/add-book';
-
-const signinUrl: string = `/api/signin`;
 
 export default function Nav(): JSX.Element {
 	const dispatch = useDispatch();
@@ -12,42 +9,15 @@ export default function Nav(): JSX.Element {
 
 	const handleSignOut = () => {
 		window.sessionStorage.removeItem('token');
+		window.sessionStorage.removeItem('id');
 		dispatch(logout());
 	};
 
 	const handleDemo = async (): Promise<void> => {
-		console.log(signinUrl);
-		const saveAuthTokenInSession = (token: string) => {
-			window.sessionStorage.setItem('token', token);
-		};
 		try {
-			const response = await fetch(signinUrl, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					email: 'demo@demo.com',
-					password: 'demo',
-				}),
-			});
-			const data = await response.json();
-			if (data.success) {
-				saveAuthTokenInSession(data.token);
-				const resp = await fetch(`/api/users/${data.userid}`, {
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: data.token,
-					},
-				});
-				const user = await resp.json();
-				if (user.userid) {
-					dispatch(login(user));
-				}
-			}
-		} catch (err) {
-			console.error(err);
+			dispatch(getToken({ email: 'demo@demo.com', password: 'demo' }));
+		} catch (error) {
+			return;
 		}
 	};
 
@@ -94,7 +64,10 @@ export default function Nav(): JSX.Element {
 					</div>
 				) : (
 					<div>
-						<button onClick={handleDemo} className='btn btn-info '>
+						<button
+							onClick={handleDemo}
+							className='btn btn-info '
+							data-testid='demo-button'>
 							Demo
 						</button>
 					</div>

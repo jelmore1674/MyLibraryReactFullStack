@@ -1,14 +1,9 @@
 import { MDBAnimation } from 'mdbreact';
-
 import React, { useState } from 'react';
-
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { login } from '../../redux/user/userSlice';
-
+import { getToken } from '../../redux/user/userSlice';
 import Input from '../input/input';
-
-const url = `/api/signin`;
 
 export default function Signin(): JSX.Element {
 	const [input, setInput] = useState({
@@ -17,10 +12,6 @@ export default function Signin(): JSX.Element {
 	});
 
 	const dispatch = useDispatch();
-
-	const saveAuthTokenInSession = (token: string): void => {
-		window.sessionStorage.setItem('token', token);
-	};
 
 	const handleChange = (
 		event: React.SyntheticEvent<HTMLInputElement>
@@ -34,33 +25,7 @@ export default function Signin(): JSX.Element {
 	const handleSubmit = async (event: React.SyntheticEvent): Promise<void> => {
 		event.preventDefault();
 		try {
-			const response = await fetch(url, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					email: input.email,
-					password: input.password,
-				}),
-			});
-			const data = await response.json();
-			if (data.success) {
-				saveAuthTokenInSession(data.token);
-				const resp = await fetch(`/api/users/${data.userid}`, {
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: data.token,
-					},
-				});
-				const user = await resp.json();
-				if (user.userid) {
-					dispatch(login(user));
-				}
-			} else {
-				throw new Error(data.message);
-			}
+			dispatch(getToken(input));
 		} catch (err) {
 			console.error(err);
 		}
@@ -74,7 +39,9 @@ export default function Signin(): JSX.Element {
 						<div className='border-bottom h2 p-2 text-white'>
 							Sign In
 						</div>
-						<form onSubmit={(e) => handleSubmit(e)}>
+						<form
+							onSubmit={(e) => handleSubmit(e)}
+							data-testid='sign-in'>
 							<Input
 								type='email'
 								id='email'
@@ -100,7 +67,9 @@ export default function Signin(): JSX.Element {
 									Sign In
 								</button>
 								<Link to='/register' className='col-xs-12'>
-									<button className='btn btn-secondary btn-lg w-100  '>
+									<button
+										className='btn btn-secondary btn-lg w-100'
+										data-testid='register-button'>
 										Register
 									</button>
 								</Link>
