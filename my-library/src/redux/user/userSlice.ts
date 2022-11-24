@@ -27,7 +27,7 @@ export const getToken = createAsyncThunk(
 	'user/getToken',
 	async (userLogin: UserLogin, { rejectWithValue }) => {
 		try {
-			const response = await fetch('http://localhost:5500/signin', {
+			const response = await fetch('api/signin', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ export const loginUser = createAsyncThunk(
 	async (token: any, { rejectWithValue }) => {
 		try {
 			const resp = await fetch(
-				`http://localhost:5500/users/${token.userid}`,
+			`api/users/${token.userid}`,
 				{
 					method: 'GET',
 					headers: {

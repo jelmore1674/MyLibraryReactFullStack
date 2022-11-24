@@ -15,7 +15,7 @@ export const fetchLibraryByUserId = createAsyncThunk(
 	async (userId: number, { rejectWithValue }) => {
 		try {
 			const response = await fetch(
-				`http://localhost:5500/library-item/${userId}`
+				`api/library-item/${userId}`
 			);
 			const data = await response.json();
 			return data;
