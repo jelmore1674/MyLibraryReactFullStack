@@ -1,95 +1,82 @@
-version: '3.3'
+version: "3.3"
 services:
-    # NGINX
-    nginx:
-        depends_on:
-            - server
-            - client
-            - postgres
-            - redis
-            - adminer
-        restart: unless-stopped
-        build:
-            dockerfile: Dockerfile
-            context: ./nginx
-        ports:
-            - '3800:80'
-        networks:
-            - library
-    # FrontEnd React
-    client:
-        container_name: client
-        restart: always
-        build: ./my-library
-        working_dir: /app/client
-        command: serve -s build -l 3000
-        volumes:
-            - ./my-library:/app/client
-        environment:
-            REACT_APP_HOST: http://localhost:3800/api
-        ports:
-            - 3500:3000
-        networks:
-            - library
-    # Node Backend
-    server:
-        container_name: server
-        restart: unless-stopped
-        build: ./mylibrary-backend
-        working_dir: /app/server
-        command: pm2-runtime build/index.js
-        environment:
-            POSTGRES_URI: postgres://${PG_USER}:${PG_PASS}@postgres:5432/${PG_DB}
-            REDIS_URI: redis://redis:6379
-            JWT_SECRET: ${JWT_SECRET}
-        volumes:
-            - ./mylibrary-backend:/app/server
-            - /app/server/node_modules/
-        ports:
-            - 5500:5500
+  # NGINX
+  nginx:
+    depends_on:
+      - server
+      - client
+      - postgres
+      - redis
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "3800:80"
+    networks:
+      - library
+  # FrontEnd React
+  client:
+    container_name: client
+    restart: always
+    build: ./my-library
+    working_dir: /app/client
+    command: serve -s build -l 3000
+    volumes:
+      - ./my-library:/app/client
+    environment:
+      REACT_APP_HOST: http://localhost:3800/api
+    ports:
+      - 3500:3000
+    networks:
+      - library
+  # Node Backend
+  server:
+    container_name: server
+    restart: unless-stopped
+    build: ./mylibrary-backend
+    working_dir: /app/server
+    command: pm2-runtime build/index.js
+    environment:
+      POSTGRES_URI: postgres://${PG_USER}:${PG_PASS}@postgres:5432/${PG_DB}
+      REDIS_URI: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET}
+    volumes:
+      - ./mylibrary-backend:/app/server
+      - /app/server/node_modules/
+    ports:
+      - 5500:5500
 
-        networks:
-            - library
-        depends_on:
-            - postgres
-            - redis
+    networks:
+      - library
+    depends_on:
+      - postgres
+      - redis
 
-    # Postgres DB
-    postgres:
-        restart: unless-stopped
-        environment:
-            POSTGRES_USER: ${PG_USER}
-            POSTGRES_PASSWORD: ${PG_PASS}
-            POSTGRES_DB: ${PG_DB}
-            POSTGRES_HOST: postgres
-        build: ./postgres
-        volumes:
-            - ./postgres/pgdata:/var/lib/postgresql/data
-        ports:
-            - '5431:5432'
-        networks:
-            - library
-    # Redis
-    redis:
-        restart: unless-stopped
-        image: redis
-        ports:
-            - '6377:6379'
-        networks:
-            - library
-    # Adminer
-    adminer:
-        image: adminer:latest
-        restart: unless-stopped
-        networks:
-            - library
-        ports:
-            - 8000:8080
-        depends_on:
-            - postgres
-        environment:
-            ADMINER_DEFAULT_SERVER: postgres
+  # Postgres DB
+  postgres:
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASS}
+      POSTGRES_DB: ${PG_DB}
+      POSTGRES_HOST: postgres
+    build: ./postgres
+    volumes:
+      - ./postgres/pgdata:/var/lib/postgresql/data
+    ports:
+      - "5431:5432"
+    networks:
+      - library
+  # Redis
+  redis:
+    restart: unless-stopped
+    image: redis
+    ports:
+      - "6377:6379"
+    networks:
+      - library
 
 networks:
-    library:
-        driver: bridge
+  library:
+    driver: bridge
