@@ -5,6 +5,9 @@ services:
         depends_on:
             - server
             - client
+            - postgres
+            - redis
+            - adminer
         restart: unless-stopped
         build:
             dockerfile: Dockerfile
