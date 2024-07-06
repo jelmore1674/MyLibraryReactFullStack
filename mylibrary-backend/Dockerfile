@@ -2,7 +2,7 @@ FROM node:16
 
 WORKDIR /app/server
 
-COPY ./ ./
+COPY . .
 
 RUN npm install
 
