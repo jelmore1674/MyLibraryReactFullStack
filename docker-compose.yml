@@ -12,7 +12,7 @@ services:
       dockerfile: Dockerfile
       context: ./nginx
     ports:
-      - "3800:80"
+      - "80:80"
     networks:
       - library
   # FrontEnd React
